@@ -1,0 +1,2 @@
+prisma deploy
+prisma generate

@@ -1,0 +1,4 @@
+apps:
+  - script: npm run start
+    instances: 1
+    name: api

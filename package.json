@@ -1,0 +1,17 @@
+{
+  "name": "todo-list-backend",
+  "version": "1.0.0",
+  "description": "Todo List App Backend",
+  "main": "app.js",
+  "author": "Leon Pahole",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "graphql-yoga": "^1.18.3",
+    "prisma-client-lib": "^1.34.10"
+  },
+  "scripts": {
+    "start": "node ./src/app.js"
+  }
+}

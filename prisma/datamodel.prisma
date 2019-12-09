@@ -1,0 +1,32 @@
+type TodoList {
+  id: ID! @id
+  title: String!
+  createdAt: DateTime! @createdAt
+  tags: [Tag!] @relation(link: TABLE onDelete: CASCADE)
+  tasks: [Task!]
+}
+
+type Task {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  description: String!
+  deadline: DateTime
+  reminder: DateTime
+  state: TaskState!
+  tags: [Tag!] @relation(link: TABLE onDelete: CASCADE)
+  todoList: TodoList @relation(link: INLINE onDelete: CASCADE)
+}
+
+enum TaskState {
+  InProgress, 
+  Finished
+}
+
+type Tag {
+  id: ID! @id
+  title: String!
+  color: String!
+  todoLists: [TodoList!]
+  tasks: [Task!]
+  createdAt: DateTime! @createdAt
+}

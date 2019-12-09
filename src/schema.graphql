@@ -1,0 +1,81 @@
+scalar DateTime
+
+type Query {
+  todoLists: [TodoList!]!
+  todoList(id: ID!): TodoList
+
+  tags: [Tag!]!
+}
+
+type Mutation {
+  createTodoList(
+    title: String!
+    tagIDs: [ID!]
+    tags: [TagInput!]
+    tasks: [TaskInput!]
+  ): TodoList!
+  updateTodoList(id: ID!, title: String): TodoList
+  deleteTodoList(id: ID!): TodoList
+
+  addTagsToTodoList(id: ID!, tagIDs: [ID!], tags: [TagInput!]): TodoList
+  deleteTagsFromTodoList(id: ID!, tagIDs: [ID!]!): TodoList
+
+  addTasksToTodoList(id: ID!, tasks: [TaskInput!]!): TodoList
+  updateTaskInTodoList(
+    id: ID!
+    description: String
+    deadline: DateTime
+    reminder: DateTime
+    state: TaskState
+  ): Task
+  deleteTasksFromTodoList(id: ID!, taskIDs: [ID!]): TodoList
+
+  addTagsToTask(id: ID!, tagIDs: [ID!], tags: [TagInput!]): Task
+  deleteTagsFromTask(id: ID!, tagIDs: [ID!]!): Task
+
+  createTag(title: String!, color: String!): Tag!
+  updateTag(id: ID!, title: String, color: String): Tag
+  deleteTag(id: ID!): Tag
+}
+
+type TodoList {
+  id: ID!
+  title: String!
+  createdAt: DateTime!
+  tags: [Tag!]
+  tasks: [Task!]
+}
+
+type Task {
+  id: ID!
+  createdAt: DateTime!
+  description: String!
+  deadline: DateTime
+  reminder: DateTime
+  state: TaskState!
+  tags: [Tag!]!
+}
+
+input TaskInput {
+  description: String!
+  deadline: DateTime
+  reminder: DateTime
+  state: TaskState
+  tagIDs: [ID!]
+}
+
+enum TaskState {
+  InProgress
+  Finished
+}
+
+type Tag {
+  id: ID!
+  title: String!
+  color: String!
+}
+
+input TagInput {
+  title: String!
+  color: String!
+}
